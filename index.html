@@ -1,51 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>倒计时</title>
+
   <style>
-    body {
-      font-family: monospace;
-      text-align: center;
-      margin-top: 100px;
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Inter", "SF Pro Display", monospace;
     }
-    #time {
-      font-size: 48px;
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(
+        circle at top,
+        #ff7ac8,
+        #9b5cff 40%,
+        #1a002b 75%
+      );
+      color: white;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 48px 64px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .label {
+      font-size: 18px;
+      opacity: 0.8;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .seconds {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(255, 160, 255, 0.6);
+    }
+
+    .unit {
+      font-size: 24px;
+      margin-left: 8px;
+      opacity: 0.85;
+    }
+
+    .finished {
+      font-size: 56px;
+      font-weight: 700;
+      color: #ffd6ff;
     }
   </style>
 </head>
 <body>
 
-<h1>倒计时</h1>
-<div id="time">加载中...</div>
+  <div class="card">
+    <div class="label">倒计时</div>
+    <div id="display" class="seconds">加载中…</div>
+  </div>
 
-<script>
-  // 目标时间（UTC 或本地时间都可以）
-  const targetTime = new Date("2026-02-01T00:00:00").getTime();
+  <script>
+    // 👇 改成你的目标时间
+    const targetTime = new Date("2026-02-01T00:00:00").getTime();
 
-  function updateCountdown() {
-    const now = Date.now();
-    let diff = Math.floor((targetTime - now) / 1000);
+    const display = document.getElementById("display");
 
-    if (diff <= 0) {
-      document.getElementById("time").innerText = "时间到！";
-      return;
+    function tick() {
+      const now = Date.now();
+      const remainingSeconds = Math.floor((targetTime - now) / 1000);
+
+      if (remainingSeconds <= 0) {
+        display.className = "finished";
+        display.textContent = "时间到";
+        clearInterval(timer);
+        return;
+      }
+
+      display.innerHTML = `${remainingSeconds}<span class="unit">秒</span>`;
     }
 
-    const days = Math.floor(diff / 86400);
-    diff %= 86400;
-    const hours = Math.floor(diff / 3600);
-    diff %= 3600;
-    const minutes = Math.floor(diff / 60);
-    const seconds = diff % 60;
-
-    document.getElementById("time").innerText =
-      `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
+    tick();
+    const timer = setInterval(tick, 1000);
+  </script>
 
 </body>
 </html>
