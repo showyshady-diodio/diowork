@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>倒计时</title>
+  <style>
+    body {
+      font-family: monospace;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #time {
+      font-size: 48px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>倒计时</h1>
+<div id="time">加载中...</div>
+
+<script>
+  // 目标时间（UTC 或本地时间都可以）
+  const targetTime = new Date("2026-02-01T00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = Date.now();
+    let diff = Math.floor((targetTime - now) / 1000);
+
+    if (diff <= 0) {
+      document.getElementById("time").innerText = "时间到！";
+      return;
+    }
+
+    const days = Math.floor(diff / 86400);
+    diff %= 86400;
+    const hours = Math.floor(diff / 3600);
+    diff %= 3600;
+    const minutes = Math.floor(diff / 60);
+    const seconds = diff % 60;
+
+    document.getElementById("time").innerText =
+      `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
