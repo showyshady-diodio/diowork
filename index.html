@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <title>倒计时</title>
+  <title>张馨文啵啵啵啵</title>
 
   <style>
     html, body {
@@ -27,24 +27,35 @@
     .card {
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(16px);
-      border-radius: 24px;
-      padding: 48px 64px;
+      border-radius: 28px;
+      padding: 48px 72px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
 
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: 4px;
+      color: #ffd6ff;
+      text-shadow:
+        0 0 12px rgba(255, 160, 255, 0.8),
+        0 0 32px rgba(155, 92, 255, 0.6);
+    }
+
     .label {
-      font-size: 18px;
-      opacity: 0.8;
+      font-size: 16px;
+      opacity: 0.75;
       letter-spacing: 2px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .seconds {
-      font-size: 72px;
-      font-weight: 700;
+      font-size: 80px;
+      font-weight: 800;
       letter-spacing: 2px;
-      text-shadow: 0 0 20px rgba(255, 160, 255, 0.6);
+      text-shadow: 0 0 24px rgba(255, 160, 255, 0.6);
     }
 
     .unit {
@@ -63,14 +74,15 @@
 <body>
 
   <div class="card">
+    <div class="title">张馨文啵啵啵啵</div>
+
     <div class="label">倒计时</div>
     <div id="display" class="seconds">加载中…</div>
   </div>
 
   <script>
     // 👇 改成你的目标时间
-    const targetTime = new Date("2026-02-01T00:00:00").getTime();
-
+    const targetTime = new Date("2026-02-15T00:00:00").getTime();
     const display = document.getElementById("display");
 
     function tick() {
